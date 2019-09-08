@@ -1,0 +1,78 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+<!-- Container -->
+    <style>
+    :root{
+        --shadow: 0 11px 9px rgba(129, 127, 127, 0.7);
+    }
+    </style>
+
+<div class="container my-5">
+<!--  Cards-->
+  <div class="row my-5">
+      {% for post in posts %}
+          {% if post.id <= 4 %}
+              <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 pl-0">
+                  <div class="box-part bg-white text-center" style="box-shadow: var(--shadow);">
+                    <i class="fas fa-horse fa-3x my-3" aria-hidden="true"></i>
+                    <div class="title">
+                      <h4>{{ post.title }}</h4>
+                    </div>
+                    <div class="text">
+                      <span style="white-space: pre-line">{{ post.content }}</span>
+                    </div>
+                    <a class="btn icon-box-white card-read" href="">szczegóły</a>
+                  </div>
+              </div>
+          {% endif %}
+    {% endfor %}
+  </div>
+
+  <!--  .Cards-->
+
+  <div class="row" style="box-shadow: var(--shadow);">
+    <div class="col-md-7 border-light bg-white">
+      <h1 class="my-4">Page Heading
+        <small>Secondary Text</small>
+      </h1>
+      <div class="card mb-4" style="box-shadow: var(--shadow);">
+        <img class=" d-none d-lg-block card-img-top" src="{% static 'img/logo2.png' %}" style="width: 633px; height: 300px;" alt="Card image cap">
+        <div class="card-body">
+            {% for post in posts %}
+          {% if post.id == 5 %}
+          <h2 class="card-title">{{ post.title }}</h2>
+          <p class="card-text" style="white-space: pre-line">{{ post.content }}</p>
+          <a class="btn icon-box-white card-read" href="">szczegóły</a>
+            {% endif %}
+    {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5 border-light bg-white">
+      <h1 class="my-4">tytuł
+      </h1>
+
+
+      <div class="card my-4" style="box-shadow: var(--shadow);">
+      {% for post in posts %}
+        {% if post.id == 6 %}
+            <h5 class="card-header bg-main text-light">{{ post.title }}</h5>
+            <div class="card-body">
+                <article class="media content-section">
+                  <div class="media-body">
+                    <p class="article-content" style="white-space: pre-line">{{ post.content }}</p>
+                  </div>
+                </article>
+            </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- .Container -->
+{% endblock content %}

@@ -1,0 +1,31 @@
+ {% extends "main/base.html" %}
+{% block content %}
+    <style>
+    :root{
+        --shadow: 0 11px 6px rgba(129, 127, 127, 0.7);
+    }
+    </style>
+
+<div class="container">
+ {% for post in posts %}
+        <article class="media content-section container py-5 mx-auto">
+    <div class="media-body ">
+
+          <div class="card" style="box-shadow: var(--shadow);">
+          <div class="article-metadata ml-3 mt-3 ">
+              <div>
+                <a class="btn btn-primary mt-1 mb-1" href="{% url 'post-update' post.id %}">Edytuj</a>
+              </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="article-content" style="white-space: pre-line;">{{ post.content }}</p>
+          </div>
+        </div>
+    </div>
+  </article>
+        <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}
