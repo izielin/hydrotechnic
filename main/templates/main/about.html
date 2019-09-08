@@ -1,0 +1,79 @@
+{% extends "main/base.html" %}
+{%  load static %}
+{% block content %}
+<!-- Container -->
+
+        <style>
+    :root{
+        --shadow: 0 11px 9px rgba(129, 127, 127, 0.7);
+    }
+    </style>
+
+<div class="container my-5">
+
+<!-- Counters -->
+  <div class="row bg-white my-5 py-5" style="box-shadow: var(--shadow);">
+    <h2 class="card-title h1-responsive pt-3 mb-5 font-bold mx-auto"><strong>Tytuł</strong></h2>
+    <p class="mx-5 mb-5 text-lg-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
+      optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos. Odit sed qui, dolorum!
+    </p>
+    <div class=" col-lg-3">
+      <div class="counter col_fourth rounded-0 bg-white">
+        <i class="fa fa-code fa-2x"></i>
+        <h2 class="timer count-title count-number" data-to="{{ years }}" data-speed="1500"></h2>
+        <p class="count-text ">Lata Doświadczenia</p>
+      </div>
+    </div>
+    <div class=" col-lg-3">
+      <div class="counter col_fourth rounded-0 bg-white">
+        <i class="fa fa-code fa-2x"></i>
+        <h2 class="timer count-title count-number" data-to="500" data-speed="1500"></h2>
+        <p class="count-text ">Ukończonych projektów</p>
+      </div>
+    </div>
+    <div class=" col-lg-3">
+      <div class="counter col_fourth rounded-0 bg-white">
+        <i class="fa fa-code fa-2x"></i>
+        <h2 class="timer count-title count-number" data-to="900" data-speed="1500"></h2>
+        <p class="count-text ">Zadowolonych klientów</p>
+      </div>
+    </div>
+    <div class=" col-lg-3">
+      <div class="counter col_fourth rounded-0 bg-white">
+        <i class="fa fa-code fa-2x"></i>
+        <h2 class="timer count-title count-number" data-to="2" data-speed="1500"></h2>
+        <p class="count-text ">Lata Gwarancji</p>
+      </div>
+    </div>
+
+  </div>
+<!-- .Counters -->
+
+  <!-- Jumbotron -->
+  <div class="row bg-white my-5 py-5" style="box-shadow: var(--shadow);">
+    {% for post in posts %}
+      {% if post.id == 7 %}
+      <div class="jumbotron text-center hoverable p-4 bg-white">
+      <div class="row">
+        <div class="col-md-4 offset-md-1 mx-3 my-3">
+          <div class="view overlay">
+              <h4 class="h4 mb-4 invisible"> Post7</h4>
+            <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="Sample image for first version of blog listing">
+          </div>
+        </div>
+        <div class="col-md-7 ml-3 mt-3">
+          <h4 class="h4 mb-4">{{ post.title }}</h4>
+          <p class="font-weight-normal" style="white-space: pre-line; text-align: justify; text-justify: inter-word;"> {{ post.content }}</p>
+        </div>
+      </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+
+    </div>
+<!-- .Jumbotron -->
+
+</div>
+<!-- .Container -->
+
+{% endblock content %}
