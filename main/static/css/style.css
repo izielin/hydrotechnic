@@ -7,7 +7,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	min-height: 100vh;
+	height: auto;
 	font-family: 'PT Sans Narrow', sans-serif;
 	justify-content: center;
 }
@@ -38,7 +38,7 @@ body {
 }
 
 .open .layer:nth-child(2) {
-	background: #03a9f4;
+	background: #183E74;
 	animation-delay: 1s;
 	z-index: 1;
 }
@@ -82,6 +82,7 @@ section {
 	transform: scaleX(0);
 	animation: revealTextReverse 1s ease-in-out forwards;
 	font-weight: bolder;
+	color: #183E74;
 }
 
 .bannerText h2 {
@@ -99,7 +100,7 @@ section {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: #000;
+	background: #183E74;
 	width: 100%;
 	height: 100%;
 	transform-origin: right;
@@ -157,7 +158,7 @@ section {
 	display: inline-block;
 	margin: 20px 0 0;
 	padding: 10px 20px;
-	background: #000;
+	background: #183E74;
 	color: #fff;
 	font-weight: 700;
 	text-decoration: none;
@@ -193,28 +194,25 @@ section {
 
 
 .header ul li:nth-child(1){
-	animation-delay: 5s;
+	animation-delay: 2s;
 }
 
 .header ul li:nth-child(2){
-	animation-delay: 5.25s;
+	animation-delay: 2.25s;
 }
 
 .header ul li:nth-child(3){
-	animation-delay: 5.5s;
+	animation-delay: 2.5s;
 }
 
 .header ul li:nth-child(4){
-	animation-delay: 5.75s;
+	animation-delay: 2.75s;
 }
 
 .header ul li:nth-child(5){
-	animation-delay: 6s;
+	animation-delay: 3s;
 }
 
-.header ul li:nth-child(6){
-	animation-delay: 6.25s;
-}
 
 .header {
 	position: absolute;
@@ -238,7 +236,7 @@ section {
 	font-size: 2em;
 	text-transform: uppercase;
 	animation: fadeIn 0.5s linear forwards;
-	animation-delay: 5s;
+	animation-delay: 3s;
 }
 
 .header ul {
@@ -262,13 +260,13 @@ section {
 .header ul li a {
 	text-decoration: none;
 	font-size: 1.2em;
-	color: #000;
+	color: #183E74;
 	padding: 5px 10px;
 	letter-spacing: 2px;
 }
 
 .header ul li a.active, .header ul li a:hover {
-	background: #000;
+	background: #183E74;
 	color: #fff;
 }
 
@@ -292,7 +290,7 @@ section {
 	right: 35%;
 	width: 300px;
 	height: 300px;
-	border: 40px solid #000;
+	border: 40px solid #486691;
 	animation: rotate 40s linear infinite, fadeIn 1s linear forwards;
 	animation-delay: 7s;
 }
@@ -304,7 +302,7 @@ section {
 	top: 40%;
 	width: 50px;
 	height: 50px;
-	border: 2px solid #000;
+	border: 2px solid #486691;
 	animation: rotate 30s linear infinite, fadeIn 1s linear forwards;
 	animation-delay: 7s;
 }
@@ -317,7 +315,7 @@ section {
 	left: 7%;
 	width: 350px;
 	height: 350px;
-	border: 40px solid #000;
+	border: 40px solid #486691;
 	animation: rotate 55s linear infinite, fadeIn 1s linear forwards;
 	animation-delay: 7s;
 	z-index: 1;
@@ -330,7 +328,7 @@ section {
 	top: 140%;
 	width: 70px;
 	height: 70px;
-	border: 2px solid #000;
+	border: 2px solid #486691;
 	animation: rotate 15s linear infinite, fadeIn 1s linear forwards;
 	animation-delay: 7s;
 }
@@ -363,9 +361,10 @@ section {
 	padding-right: auto;
 	padding-left: auto;
 	z-index: 1001;
-	top: 95%;
+	top: 91%;
 	left: 20%;
 	opacity: 0;
+	padding-top: 0;
 }
 
 
@@ -375,7 +374,7 @@ section {
 	position: relative;
 	width: 300px;
 	height: 400px;
-	background: #000;
+	background: #183E74;
 	box-shadow: 0 30px 30px rgba(0,0,0,.5);
 	z-index: 1001;
 }
@@ -447,7 +446,7 @@ section {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #242423;
+    background-color: #486691;
     color:#fff;
     padding: 9px 12px;
     border-radius: 50%;
@@ -455,7 +454,7 @@ section {
 }
 .to-top:hover{
     background-color: #fff;
-    color: #000;
+    color: #183E74;
 }
 
 
@@ -463,7 +462,7 @@ section {
 	opacity: 0;
     position: absolute;
     max-width: 1140px;
- 	top: 150%;
+ 	top: 170%;
  	left: 22%;
 	animation: fadeIn 1s linear forwards;
 	animation-delay: 8.3s;
@@ -490,7 +489,7 @@ section {
   height: 100px;
   display: table;
   text-align: center;
-  background: #000;
+  background: #183E74;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -526,6 +525,13 @@ section {
   text-transform: uppercase;
 }
 
+footer {
+	background-color: #183E74;
+	width: 100%;
+	z-index: 1001;
+ position: absolute;
+	top: 230%;
+}
 
 
 @media (min-width: 1320px ) and (max-width: 1550px) {
@@ -538,6 +544,10 @@ section {
 		left: 5%;
 		padding: 50px;
 	}
+
+			footer {
+	top: 250%;
+}
 }
 
 
@@ -559,9 +569,20 @@ section {
 		display: none;
 	}
 
+
 }
 
 @media (max-width: 1280px) {
+
+	.services{
+		top: 75%;
+		left: 0;
+		margin-top: 100px;
+		margin-left: 100px;
+		transform: translateY(0);
+		z-index: 1001;
+		padding: 50px;
+	}
 
 	section {
 		height: auto !important;
@@ -576,32 +597,28 @@ section {
 		margin-top: 100px;
 		margin-left: 100px;
 		transform: translateY(0);
-		max-width: 700px;
 		z-index: 1001;
 		padding: 50px;
+		max-width: 100%;
 	}
 
-	.box{
-		margin-top: 250px;
-		left: 0;
-		padding: 50px;
-	}
-
-	.services{
-		left: 0;
-		padding: 50px;
-	}
 }
 
 
 @media (max-width: 991px) {
 
-	footer div .col-md-2 h6, footer hr {
+
+	footer div .footer-menu, footer hr {
 		display: none;
 	}
 
 	section {
 		padding: 50px 80px 0px 50px;
+	}
+
+	.services {
+		padding: 50px 80px 0px 50px;
+    	top: auto !important;
 	}
 
 	.header{
@@ -620,15 +637,17 @@ section {
 	}
 
 	.bannerText h2 {
+		font-size: 5em;
+	}
+
+	.bannerText h3, .services .text h3 {
 		font-size: 3em;
 	}
 
-	.bannerText h3 {
-		font-size: 1.5em;
+	.bannerText p, .bannerText a {
+		font-size: 2em;
 	}
-
-
-	.header ul {
+		.header ul {
 		position: fixed;
 		background: #fff;
 		top: 0;
@@ -641,6 +660,7 @@ section {
 		justify-content: center;
 		align-content: center;
 		overflow-y: scroll;
+		font-size: 40px;
 	}
 
 	.header ul.show {
@@ -655,4 +675,35 @@ section {
 	.header ul li:nth-child(4), .header ul li:nth-child(5), .header ul li:nth-child(6) {
 		animation-delay: 0s !important;
 
-	}}
+	}
+
+	footer {
+	top: 180%;
+}
+}
+
+@media (max-width: 600px) {
+
+
+	.feature .text {
+		width: auto;
+	}
+
+	.feature .icon {
+		width: 200px;
+		height: 200px;
+	}
+
+	.feature .icon i{
+		font-size: 4.5em;
+	}
+
+	.feature .text p, .feature .text h3 {
+		margin-left: 90px;
+		    width: 120%;
+		padding-left: 5px;
+		font-size: 2em;
+	}
+
+
+}

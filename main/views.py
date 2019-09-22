@@ -12,7 +12,8 @@ from hydrotechnic.settings import MEDIA_ROOT
 
 def home(request):
     context = {
-        'posts': Post.objects.all()
+        'post_carousel': Post.objects.filter(category='main_page_carousel'),
+        'post_services': Post.objects.filter(category='main_page_services')
 
     }
     return render(request, 'main/home.html', context)
