@@ -95,7 +95,7 @@ section {
 }
 
 .bannerText h2:before,
-.bannerText h3:before {	
+.bannerText h3:before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -382,7 +382,7 @@ section {
 .box .imgBx {
 	position: absolute;
 	top: 0;
-	left: 0; 
+	left: 0;
 	width: 100%;
 	height: 100%;
 }
@@ -390,7 +390,7 @@ section {
 .box .imgBx img{
 	position: absolute;
 	top: 0;
-	left: 0; 
+	left: 0;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -478,7 +478,6 @@ section {
   position: relative;
   margin-bottom: 40px;
   max-width: 500px;
-
 }
 
 .feature .icon {
@@ -608,7 +607,7 @@ footer {
 @media (max-width: 991px) {
 
 
-	footer div .footer-menu, footer hr {
+	footer {
 		display: none;
 	}
 
@@ -660,7 +659,7 @@ footer {
 		justify-content: center;
 		align-content: center;
 		overflow-y: scroll;
-		font-size: 40px;
+		font-size: 30px;
 	}
 
 	.header ul.show {
@@ -677,9 +676,6 @@ footer {
 
 	}
 
-	footer {
-	top: 180%;
-}
 }
 
 @media (max-width: 600px) {

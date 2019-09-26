@@ -22,46 +22,42 @@
 				<ul id="navigation">
                     {% if user.is_authenticated %}
                         <li>
-						<a href="{% url 'home' %}" class="active">Strona główna</a>
+						<a href="{% url 'home' %}" name="home" >Strona główna</a>
 					</li>
 					<li>
-						<a href="{% url 'profile' %}">Profil</a>
+						<a href="{% url 'profile' %}" name="profile">Profil</a>
 					</li>
 					<li>
-						<a href="{% url 'post-list' %}">Lista wpisów</a>
+						<a href="{% url 'post-list' %}" name="post-list">Lista wpisów</a>
 					</li>
 					<li>
-						<a href="{% url 'upload' %}">Dodaj Zdjecie</a>
+						<a href="{% url 'upload' %}" name="upload">Dodaj Zdjecie</a>
 					</li>
                     <li>
-						<a href="{% url 'logout' %}">Wyloguj</a>
+						<a href="{% url 'logout' %}" name="logout">Wyloguj</a>
 					</li>
                     {% else %}
 					<li>
-						<a href="{% url 'home' %}" class="active">Strona główna</a>
+						<a href="{% url 'home' %}" name="home">Strona główna</a>
 					</li>
 					<li>
-						<a href="{% url 'about' %}">O firmie</a>
+						<a href="{% url 'about' %}" name="about">O firmie</a>
 					</li>
 					<li>
-						<a href="{% url 'offer' %}">Oferta</a>
+						<a href="{% url 'offer' %}" name="offer">Oferta</a>
 					</li>
 					<li>
-						<a href="{% url 'gallery' %}">Galeria</a>
-					</li>
-                    <li>
-						<a href="#">Kontakt</a>
+						<a href="{% url 'gallery' %}" name="gallery">Galeria</a>
 					</li>
                     {% endif %}
 					<i class="fa fa-times x2" onclick="menuToggle()"></i>
 				</ul>
 			</div>
-
             {% block content %} {% endblock %}
 
 
 
-<footer class="page-footer font-small footer-template">
+<footer class=" page-footer font-small footer-template">
   <div class="container">
     <div class="row text-center justify-content-center footer-menu pt-5 mb-3 ">
       <div class="col-md-2 mb-3 ">
@@ -82,11 +78,6 @@
       <div class="col-md-2 mb-3">
         <h6 class="text-uppercase font-weight-bold">
           <a  style="text-decoration: none; color: #000; background-color: #fff; padding: 10px;;" href="{% url 'gallery' %}">Galeria</a>
-        </h6>
-      </div>
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a  style="text-decoration: none; color: #000; background-color: #fff; padding: 10px;;" href="#">Kontakt</a>
         </h6>
       </div>
     </div>
@@ -110,7 +101,7 @@
 
 
 
-<a href="#top" class="to-top"><i class="fas fa-chevron-up"></i></a>
+<a  href="#top" class="to-top"><i class="fas fa-chevron-up"></i></a>
 		</section>
 
 		    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -165,6 +156,16 @@
 
 			  });
 
+
+            $(document).ready(function(){
+                let full_path = location.href.split("#")[0];
+                $("#navigation li a").each(function(){
+                    let $this = $(this);
+                    if($this.prop("href").split("#")[0] == full_path) {
+                        $this.addClass("active");
+                    }
+                });
+            });
 		</script>
 
 
