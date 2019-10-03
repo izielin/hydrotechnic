@@ -12,19 +12,23 @@
             max-width: 100%;
         }
 
+        .feature h3 {
+            margin-top: 130px;
+        }
+
         .icon {
             margin: auto;
         }
     </style>
 
-<div class="bannerText" style="left:22%; min-width: 60%;">
+<div class="bannerText" style="top:100%; left:22%; min-width: 60%;">
 
 
 <!-- Counters -->
   <div class="row feature">
       {% for post in post_counters %}
-    <h2 class="card-title h1-responsive pt-3 mb-5 font-bold mx-auto"><strong>{{ post.title }}</strong></h2>
-    <p class="mx-5 mb-5 text-lg-center">{{ post.content }}
+    <h2 class="card-title h1-responsive mb-5 font-bold mx-auto"><strong>{{ post.title }}</strong></h2>
+    <p class="mx-5 mb-5 text-lg-center mb-4">{{ post.content }}
     </p>
       {% endfor %}
     <div class=" col-lg-3">
@@ -64,32 +68,45 @@
       </div>
     </div>
 
+      <hr style="border: 1px solid black;">
   </div>
 <!-- .Counters -->
 
-  <!-- Jumbotron -->
-{#  <div class="row bg-white my-5 py-5" style="box-shadow: var(--shadow);">#}
-{#    {% for post in posts %}#}
-{#      {% if post.id == 7 %}#}
-{#      <div class="jumbotron text-center hoverable p-4 bg-white">#}
-{#      <div class="row">#}
-{#        <div class="col-md-4 offset-md-1 mx-3 my-3">#}
-{#          <div class="view overlay">#}
-{#              <h4 class="h4 mb-4 invisible"> Post7</h4>#}
-{#            <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="Sample image for first version of blog listing">#}
-{#          </div>#}
-{#        </div>#}
-{#        <div class="col-md-7 ml-3 mt-3">#}
-{#          <h4 class="h4 mb-4">{{ post.title }}</h4>#}
-{#          <p class="font-weight-normal" style="white-space: pre-line; text-align: justify; text-justify: inter-word;"> {{ post.content }}</p>#}
-{#        </div>#}
-{#      </div>#}
-{#      </div>#}
-{#      {% endif %}#}
-{#    {% endfor %}#}
-{##}
-{#    </div>#}
-<!-- .Jumbotron -->
+
+<div class="row feature">
+<div class="col-4">
+    <img style="left: 22%;" src="{% static 'img/img2.jpg' %}" class="bulb">
+
+</div>
+    {% for post in about_main_content %}
+        {% if post.id == 1 %}
+<div class="col">
+          <h2 class="card-title h1-responsive mb-5 font-bold mx-auto"><strong>{{ post.title }}</strong></h2>
+    <p class="mx-5 mb-5 text-lg-center mb-4">{{ post.content }}
+    </p>
+          {% endif %}
+{% endfor %}
+
+<div class="row">
+    {% for post in about_main_content %}
+
+    {% if post.id > 1 %}
+
+    <h2 class="card-title h1-responsive mb-5 font-bold mx-auto"><strong>{{ post.title }}</strong></h2>
+    <p class="mx-5 mb-5 text-lg-center mb-4">{{ post.content }}
+    </p>
+
+    {% endif %}
+      {% endfor %}
+
+
+  </div>
+
+  </div>
+</div>
+
+
+</div>
 
 </div>
 <!-- .Container -->

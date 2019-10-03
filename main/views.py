@@ -25,6 +25,7 @@ def about(request):
     years = today.year - that.year
     context = {
         'post_counters': Post.objects.filter(category='about_content'),
+        'about_main_content': Post.objects.filter(category='about_main_content'),
         'years': years
     }
     return render(request, 'main/about.html', context)
