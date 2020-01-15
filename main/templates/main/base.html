@@ -4,20 +4,19 @@
 	<head>
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta charset="utf-8">
-		<title>Responsive CSS Landing Page Design</title>
+		<title>Hydrotechnika</title>
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
 	</head>
-	<body>
-		<div class="open">
-			<div class="layer"></div>
-			<div class="layer"></div>
-		</div>
-		<section>
-			<div class="header">
-				<h2 class="logo">Your Logo</h2>
+    <header>
+					<div class="header">
+				<p class="logo">Your Logo</p>
 				<i class="fa fa-bars x2" onclick="menuToggle()"></i>
 				<ul id="navigation">
                     {% if user.is_authenticated %}
@@ -49,82 +48,60 @@
 					<li>
 						<a href="{% url 'gallery' %}" name="gallery">Galeria</a>
 					</li>
+                        <li>
+						<a href="#" name="contact">Kontact</a>
+					</li>
                     {% endif %}
 					<i class="fa fa-times x2" onclick="menuToggle()"></i>
 				</ul>
 			</div>
+	</header>
+	<body>
+		<div class="open">
+			<div class="layer"></div>
+			<div class="layer"></div>
+		</div>
             {% block content %} {% endblock %}
 
 
+			  <footer class="site-footer" role="contentinfo">
+					<div class="container">
+					  <div class="row mb-5 ">
+						<div class="col-md-4 text-center">
+						  <h4>About Us</h4>
+						  <p class="mb-5 text-center">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. .</p>
+						</div>
+						<div class="col-md-4 text-center bordered">
+						  <h4>Contact Info</h4>
+						  <ul class="list-unstyled footer-link ">
+							<li class="d-block">
+							  <span class="d-block">Address:</span>
+							  <span >34 Street Name, City Name Here, Poland</span></li>
+							<li class="d-block"><span class="d-block">Telephone:</span><span >+1 242 4942 290</span></li>
+							<li class="d-block"><span class="d-block">Email:</span><span >info@yourdomain.com</span></li>
+						  </ul>
+						</div>
+						<div class="col-md-4 text-center">
+						  <h4>Quick Links</h4>
+						  <ul class="list-unstyled footer-link">
+							<li><a href="{% url 'home' %}" name="home">Strona główna</a></li>
+					        <li><a href="{% url 'about' %}" name="about">O firmie</a></li>
+					        <li><a href="{% url 'offer' %}" name="offer">Oferta</a></li>
+					        <li><a href="{% url 'gallery' %}" name="gallery">Galeria</a></li>
+                            <li><a href="#" name="contact">Kontact</a></li>
+						  </ul>
+						</div>
+					  </div>
+					  <div class="footer-copyright text-center" style="margin-top: 150px;"><small style="color: white; float: left; margin-left: 150px;">&copy; Copyright 2019, Hydro-technika</small>
+						<small style="color: white; float: right; margin-right: 150px;">Projekt i wykonanie: Michał Parzych</small></a>
+					  </div>
+					</div>
+				  </footer>
 
-<footer class=" page-footer font-small footer-template">
-  <div class="container">
-    <div class="row text-center justify-content-center footer-menu pt-5 mb-3 ">
-      <div class="col-md-2 mb-3 ">
-        <h6 class="text-uppercase font-weight-bold">
-          <a  style="text-decoration: none; color: #000; background-color: #fff; padding: 10px;" href="{% url 'home' %}">Strona główna</a>
-        </h6>
-      </div>
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a  style="text-decoration: none; color: #000; background-color: #fff; padding: 10px;" href="{% url 'about' %}">O firmie</a>
-        </h6>
-      </div>
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a  style="text-decoration: none; color: #000; background-color: #fff; padding: 10px;" href="{% url 'offer' %}">Oferta</a>
-        </h6>
-      </div>
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a  style="text-decoration: none; color: #000; background-color: #fff; padding: 10px;;" href="{% url 'gallery' %}">Galeria</a>
-        </h6>
-      </div>
-    </div>
-    <hr style="border-color: white;">
-    <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
-      <div class="col-md-8 col-12 mt-5">
-        <p style="line-height: 1.7rem; color: #fff;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem
-          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-          explicabo.
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
-      </div>
-    </div>
-    <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
-  </div>
-  <div class="footer-copyright text-center py-3"><small style="color: white; float: left; margin-left: 150px;">&copy; Copyright 2019, Hydro-technika</small>
-    <small style="color: white; float: right; margin-right: 150px;">Projekt i wykonanie: Michał Parzych</small></a>
-  </div>
-</footer>
-
-
-
-
-<a  href="#top" class="to-top"><i class="fas fa-chevron-up"></i></a>
-		</section>
-
-		    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="{% static 'js/scrollax.min.js'%}"></script>
-    <script src="{% static 'js/jquery.min.js'%}"></script>
-    <script src="{% static 'js/jquery-migrate-3.0.1.min.js'%}"></script>
-    <script src="{% static 'js/jquery.stellar.min.js'%}"></script>
-    <script src="{% static 'js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'js/aos.js'%}"></script>
-    <script src="{% static 'js/main.js'%}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-      $(document).on("click", '[data-toggle="lightbox"]', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-      });
-    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="{% static 'js/main.js' %}"></script>
         <script type="text/javascript">
 
 
@@ -132,42 +109,6 @@
 				const element = document.getElementById("navigation");
 				element.classList.toggle("show");
 			}
-
-			$('.carousel').carousel({
-				  interval: 20000
-				})
-
-			$(document).ready(function(){
-			    let offset = 250;
-			    let duration = 500;
-
-			    $(window).scroll(function(){
-			        if($(this).scrollTop() > offset){
-			            $('.to-top').fadeIn(duration);
-			        } else {
-			            $('.to-top').fadeOut(duration);
-			        }
-			    });
-
-			    let elements = document.getElementsByClassName('carousel-item');
-                let requiredElement = elements[0];
-			    requiredElement.classList.add("active")
-
-
-			  });
-
-
-            $(document).ready(function(){
-                let full_path = location.href.split("#")[0];
-                $("#navigation li a").each(function(){
-                    let $this = $(this);
-                    if($this.prop("href").split("#")[0] == full_path) {
-                        $this.addClass("active");
-                    }
-                });
-            });
 		</script>
-
-
 	</body>
 </html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,  redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView
 from .models import Post
@@ -6,14 +6,14 @@ import os
 from django.urls import reverse
 import datetime
 from .forms import DocumentForm
-from django.http import HttpResponseRedirect
-from hydrotechnic.settings import MEDIA_ROOT
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from .forms import ContactForm
 
 
 def home(request):
     context = {
-        'post_carousel': Post.objects.filter(category='main_page_carousel'),
-        'post_services': Post.objects.filter(category='main_page_services')
+        'post': Post.objects.filter(category='main_page')
 
     }
     return render(request, 'main/home.html', context)
@@ -24,8 +24,7 @@ def about(request):
     today = datetime.date.today()
     years = today.year - that.year
     context = {
-        'post_counters': Post.objects.filter(category='about_content'),
-        'about_main_content': Post.objects.filter(category='about_main_content'),
+        'post': Post.objects.filter(category='about'),
         'years': years
     }
     return render(request, 'main/about.html', context)
@@ -33,7 +32,7 @@ def about(request):
 
 def offer(request):
     context = {
-        'posts': Post.objects.all().order_by('id')
+        'posts': Post.objects.filter(category='offer')
     }
     return render(request, 'main/offer.html', context)
 
