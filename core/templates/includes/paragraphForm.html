@@ -1,0 +1,17 @@
+<form method="POST" class="form-group" method="post" novalidate data-url_root="{% url 'core:create' %}">
+    {% csrf_token %}
+
+    <label for="id_title" class="requiredField">Tytuł: </label>
+    <input type="text" name="title" maxlength="100" required id="id_title"
+           value="{{ paragraph.title }}">
+    <input type="text" name="slug" required id="id_slug" class="d-none"
+           value="{{ mySlug }}">
+    {% if subtitle %}
+        <label for="id_subtitle">Podtytuł: </label>
+        <input type="text" name="subtitle" id="id_subtitle"
+               value="{{ paragraph.subtitle }}">
+    {% endif %}
+    <label for="id_content" class="requiredField">Treść: </label>
+    <textarea type="text" name="content" class="{{ mySlug }}" required id="id_content">
+            {{ paragraph.content }}</textarea>
+</form>
