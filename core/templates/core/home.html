@@ -3,12 +3,12 @@
 {% block content %}
     <div class="bannerText">
         {% if request.user.is_authenticated %}
-            {% include "includes/paragraphForm.html" with paragraph=paragraph1 mySlug="home_1" subtitle=True %}
+            {% include "includes/paragraphForm.html" with paragraph=paragraph1 mySlug="home_1" subtitle=True link=True %}
         {% else %}
             <h2>{{ paragraph1.title }}</h2><br>
             <h3>{{ paragraph1.subtitle }}</h3>
             <p class="myText">{{ paragraph1.content }}</p>
-            <a href="#" class="main_btn">Read More</a>
+            <a href="{{ paragraph1.link }}" class="main_btn">Dowiedz się więcej &rarr;</a>
         {% endif %}
     </div>
 
@@ -27,7 +27,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_2.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph2 mySlug="home_2" subtitle=False %}
+                                    {% include "includes/paragraphForm.html" with paragraph=paragraph2 mySlug="home_2" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_2.png' %}" alt="">
@@ -36,7 +36,7 @@
                                     <p>
                                         {{ paragraph2.content }}
                                     </p>
-                                    <a href="#">Find your cargo</a>
+                                    <a href="{{ paragraph2.link }}">Dowiedz się więcej &rarr;</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_3.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph3 mySlug="home_3" subtitle=False %}
+                                    {% include "includes/paragraphForm.html" with paragraph=paragraph3 mySlug="home_3" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_3.png' %}" alt="">
@@ -55,7 +55,7 @@
                                     <p>
                                         {{ paragraph3.content }}
                                     </p>
-                                    <a href="#">Contact Us</a>
+                                    <a href="{{ paragraph3.link }}">Dowiedz się więcej &rarr;</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_4.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph4 mySlug="home_4" subtitle=False %}
+                                    {% include "includes/paragraphForm.html" with paragraph=paragraph4 mySlug="home_4" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_4.png' %}" alt="">
@@ -74,7 +74,7 @@
                                     <p>
                                         {{ paragraph4.content }}
                                     </p>
-                                    <a href="#">Start a quote</a>
+                                    <a href="{{ paragraph4.link }}">Dowiedz się więcej &rarr;</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_5.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph5 mySlug="home_5" subtitle=False %}
+                                    {% include "includes/paragraphForm.html" with paragraph=paragraph5 mySlug="home_5" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_5.png' %}" alt="">
@@ -93,24 +93,22 @@
                                     <p>
                                         {{ paragraph5.content }}
                                     </p>
-                                    <a href="#">Get Estimate</a>
+                                    <a href="{{ paragraph5.link }}">Dowiedz się więcej &rarr;</a>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="secondDiv"
-                     class="col-lg-5 offset-md-0 col-md-12 text-left section-title-wrap mt-4 mt-lg-0">
+                <div class="col-lg-5 offset-md-0 col-md-12 text-left section-title-wrap mt-4 mt-lg-0">
                     {% if request.user.is_authenticated %}
-                        {% include "includes/paragraphForm.html" with paragraph=paragraph6 mySlug="home_6" subtitle=True %}
+                        {% include "includes/paragraphForm.html" with paragraph=paragraph6 mySlug="home_6" subtitle=True link=True %}
                     {% else %}
                         <h5>{{ paragraph6.title }}</h5>
                         <h3>{{ paragraph6.subtitle }}</h3>
                         <p>
                             {{ paragraph6.content }}
                         </p>
-                        <a href="#" class="main_btn">Learn More About Us</a>
+                        <a href="{{ paragraph6.link }}" class="main_btn">Dowiedz się więcej &rarr;</a>
                     {% endif %}
                 </div>
             </div>
@@ -132,7 +130,8 @@
                 url: form.attr("data-url_root"),
                 data: form.serialize(),
                 dataType: 'json',
-                success: function (json) {},
+                success: function (json) {
+                },
                 error: function (xhr, errmsg, err) {
                     $('#results').html("<div class='alert-box warning radius' data-alert>Oops! We have encountered an error: " + errmsg +
                         " <a href='#' class='close'>&times;</a></div>");

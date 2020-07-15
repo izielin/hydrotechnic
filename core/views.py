@@ -27,7 +27,12 @@ def create_paragraph(request):
             subtitle_form = request.GET.get('subtitle')
         else:
             subtitle_form = ''
+        if 'link' in request.GET:
+            link_form = request.GET.get('link')
+        else:
+            link_form = ''
         content_form = request.GET.get('content')
+
         try:
             print("sanity check I")
             paragraph = Paragraph.objects.get(slug=slug)
@@ -35,6 +40,7 @@ def create_paragraph(request):
             paragraph.subtitle = subtitle_form
             paragraph.slug = slug
             paragraph.content = content_form
+            paragraph.link = link_form
             paragraph.save()
             print("sanity check II")
 
@@ -44,7 +50,8 @@ def create_paragraph(request):
             paragraph = Paragraph(title=title_form,
                                   subtitle=subtitle_form,
                                   slug=slug,
-                                  content=content_form)
+                                  content=content_form,
+                                  link=link_form)
             paragraph.save()
 
         response_data['title'] = title_form

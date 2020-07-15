@@ -14,4 +14,23 @@
     <label for="id_content" class="requiredField">Treść: </label>
     <textarea type="text" name="content" class="{{ mySlug }}" required id="id_content">
             {{ paragraph.content }}</textarea>
+    {% if link %}
+        <label for="id_link" class="requiredField">Link</label>
+        <select name="link" data-title="Select Gender" data-style="btn-default btn-block"
+                data-menu-style="dropdown-blue"
+                id="id_link">
+            {% if paragraph.link != '' %}
+                {% for x,y in form.fields.link.choices %}
+                    {% if x == paragraph.link %}
+                        <option>{{ y }}</option>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <option>Wybierz odnośnik</option>
+            {% endif %}
+            {% for x,y in form.fields.link.choices %}
+                <option value="{{ x }}"{% if form.fields.link.value == x %} selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
 </form>
