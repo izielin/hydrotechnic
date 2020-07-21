@@ -5,204 +5,175 @@
     <div class="square1"></div>
     <div class="square2"></div>
 
-
-
     <section class="feature-area section_gap_top" style="margin: 150px 0 0 0;">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-7">
-
-
-                    <div class="owl-carousel owl-theme">
+                    {% if request.user.is_authenticated %}
                         <div class="row">
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/o1.png' %}" alt="">
+                            <div class="col-12 px-5">
+                                <form id="offerForm" method="post" enctype="multipart/form-data" id="formUpload"
+                                      data-url_root="{% url 'core:create_offer' %}">
+                                    {% csrf_token %}
+                                    <div class="feature-service " style="width: 100%;">
+                                        <div class="icon" style="margin-top: 30px;">
+                                            <label for="id_image" class="customImageInput"
+                                                   style="max-width: 80px; max-height: 80px; margin: 0;">
+                                                <i class="fas fa-plus"></i>
+                                            </label>
+                                            <input type="file" name="image" required="" id="id_image"
+                                                   style="display: none;" onchange="previewFile()">
+                                        </div>
+                                        <div class="icon" style="margin-top:170px;">
+                                            <img id="currentImage" src="" alt="">
+                                        </div>
+                                        <div class="text">
+                                            <label for="id_title">Title:</label>
+                                            <input type="text" name="title" maxlength="100" required="" id="id_title"
+                                                   style="margin-bottom: 20px;">
+                                            <label for="id_content">Content:</label>
+                                            <input type="text" name="content" maxlength="300" required=""
+                                                   id="id_content" style="margin-bottom: 20px;">
+                                            <button type="submit" class="main_btn">Save</button>
+                                        </div>
                                     </div>
-                                    <div class="text">
-                                        <h3>grzejniki</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/o3.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>Kotły CO</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/o2.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>Rury</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/o4.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>Anrmatura</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s1.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>instalacji centralnego ogrzewania</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s2.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3> instalacji wodno-kanalizacyjnych</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s3.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>instalacji gazowych</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s4.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>wentylacji i klimatyzacji</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s5.png' %}" alt="">
+                    {% else %}
+                        <div class="owl-carousel owl-theme">
+                            <div class="row">
+                                {% for offer in offers %}
+                                    <div class="col-12 px-5">
+                                        <div class="feature-service ">
+                                            <div class="icon">
+                                                <img src="{{ offer.image.url }}" alt="">
+                                            </div>
+                                            <div class="text">
+                                                <h3>{{ offer.title }}</h3>
+                                                <p>{{ offer.content }}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="text">
-                                        <h3> doradztwa technicznego</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
+                                    {% if forloop.counter|divisibleby:4 %}</div>
+                                        <div class="row">{% endif %}
+                                {% endfor %}
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s8.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>instalacji kolektorów słonecznych</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s6.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>przydomowych oczyszczalni ścieków</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="feature-service ">
-                                    <div class="icon">
-                                        <img src="{% static 'core/img/s7.png' %}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h3>robót ziemnych koparko-ładowarką JCB 2CX</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts. </p>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
-
-
+                    {% endif %}
                 </div>
-
                 <div class="col-lg-5 offset-md-0 col-md-12 text-left section-title-wrap mt-4 mt-lg-0">
-                    <h3>Oferta Firmy</h3>
-
-                    <h4>If you are looking at blank cassettes on the web lorem ipsum dolor sit consectetur adipisicing
-                        elit,
-                        eiusmod tempor incididunt.</h4>
-                    <p>
-                        If you are looking at blank cassettes on the web lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                        Eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt
-                        ut labore et dolore magna aliqua.
-                    </p>
+                    {% if request.user.is_authenticated %}
+                        {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="offer_1" subtitle=False link=False %}
+                    {% else %}
+                        <h3>{{ paragraph1.title }}</h3><br>
+                        <p class="myText">{{ paragraph1.content }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </section>
+    {% if request.user.is_authenticated %}
+        <div style="max-width: 70%; margin: auto;">
+            <button class="main_btn" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false"
+                    aria-controls="collapse"> Pokaż pozostałe elementy
+            </button>
+            <div id="collapse" class="collapse multi-collapse">
+                <div id="offers" class="row container mt-5">
+                    {% for offer in offers %}
+                        <div class="col-6 px-5">
+                            <div class="feature-service" style="width: 100%;">
+                                <div class="row">
+                                    <div class="icon">
+                                        <img src="{{ offer.image.url }}" alt="">
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="text">
+                                            <h3>{{ offer.title }}</h3>
+                                            <p>{{ offer.content }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <form method="post" action="{% url 'core:offer_delete' offer.pk %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="next" value="{{ request.path }}">
+                                            <button type="submit" class="close">
+                                                <span aria-hidden="true" style="color: red;">Usuń &times;</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="bannerText" style="max-width: 70%; margin: 150px auto;">
-        <h2>Wykonaliśmy między innymi:</h2><br>
-        <p>1. Instalację centralnego ogrzewania w Banku Spółdzielczym w Sandomierzu <br>
-            2. Instalacje sanitarne (c.o., wod-kan, gaz, p.poż) w Hali Sportowej przy Zespole Szkół Nr 1 w Nowej
-            Dębie<br>
-            3. Kotłownię gazową w Budynku Sądu w Sandomierzu<br>
-            4. Instalacje sanitarne w Sali Sportowej z zapleczem przy Szkole Podstawowej w Jadachach<br>
-            5. Instalacje wodno-kanalizacyjne, centralnego ogrzewania oraz przyłącza wody i kanalizacji w powstającym
-            Klasztorze Sióstr Klarysek w Sandomierzu - inwestycja w toku.<br>
-            6. Instalacje w domach jednorodzinnych<br></p>
-
+        {% if request.user.is_authenticated %}
+            {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="offer_2" subtitle=False link=False %}
+        {% else %}
+            <h2>{{ paragraph2.title }}</h2><br>
+            <p class="myText">{{ paragraph2.content }}</p>
+        {% endif %}
     </div>
-
 {% endblock content %}
+{% block javascript %}
+    <script>
+
+        function upload(event) {
+            event.preventDefault();
+            let data = new FormData($('form').get(0));
+
+            $.ajax({
+                url: $(this).attr('data-url_root'),
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    if (data.is_valid) {
+                        $("#offers").prepend(
+                            "<div class=\"col-6 px-5\">\n" +
+                            "<div class=\"feature-service \">\n" +
+                            "<div class=\"icon\">\n"
+                            + "<img src=\" " + data.image + " \" alt=''></div>\n"
+                            + "<div class=\"text\">\n" +
+                            " <h3>" + data.title + "</h3>\n" +
+                            "<p>" + data.content + "</p>\n" +
+                            "</div>\n" +
+                            "</div>\n" +
+                            "</div>\n"
+                        )
+                    }
+                }
+            });
+            return false;
+        }
+
+        $(function () {
+            $('#offerForm').submit(upload);
+        });
+
+        function previewFile() {
+            let preview = document.getElementById('currentImage');
+            let file = document.querySelector('input[type=file]').files[0];
+            let reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+    </script>
+    <script src="{% static 'core/js/ajax.js' %}"></script>
+{% endblock %}

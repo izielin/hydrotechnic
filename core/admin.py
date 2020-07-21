@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Paragraph
+from .models import Paragraph, Image, Offer
 # Register your models here.
 
 admin.site.register(Paragraph)
+admin.site.register(Image)
+admin.site.register(Offer)

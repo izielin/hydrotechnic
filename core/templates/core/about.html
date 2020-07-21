@@ -3,8 +3,6 @@
 {% block content %}
     <div class="square1"></div>
     <div class="square2"></div>
-
-    <!-- Content Row -->
     <div class="row" style="max-width: 100%;">
         <section class="counter section bannerText"
                  style="max-width: 1400px;margin-bottom: 70px;padding: 0 20px 20px 15px;background-color: transparent;margin-top: 150px;">
@@ -14,20 +12,17 @@
                 </div>
                 <div class="col-1"></div>
                 <div class="col-7">
-                    <h2 class="mb-4">Since we started work in 1980</h2>
-                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                        is a paradisematic country, in which roasted parts of sentences fly into your mouth.<br><br>
-                        Even the all-powerful Pointing has no control about the blind texts it is an almost
-                        unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                        decided to leave for the far World of Grammar.<br><br>
-                        A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                        is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-
+                    {% if request.user.is_authenticated %}
+                        {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False %}
+                    {% else %}
+                        <h2>{{ paragraph1.title }}</h2><br>
+                        <p class="myText">{{ paragraph1.content }}</p>
+                    {% endif %}
                     <div class="row">
                         <div class="col-md-6 col-lg-3 justify-content-center counter-wrap animate d-flex">
                             <div class="block text-center p-4 mb-4 align-self-stretch d-flex">
                                 <div class="text">
-                                    <strong class="count count-title count-number number">100</strong>
+                                    <strong class="count count-title count-number number">{{ years }}</strong>
                                     <span>Lata Doświadczenia</span>
                                 </div>
                             </div>
@@ -61,28 +56,20 @@
             </div>
         </section>
     </div>
-    <!-- /.col-md-4 -->
-
-
-
-
     <div class="row align-items-center bannerText" style="max-width: 1400px; transform: translateX(-50px);">
-        <div>
-            <img class="img-fluid " src="{% static 'core/img/home_1.png' %}" id="floated">
-            <h3>Business Name or Tagline</h3>
-            <p class="my-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Sapiente minus beatae distinctio et corporis pariatur molestias
-                maiores voluptatum suscipit amet similique nobis inventore alias
-                sunt doloremque nihil, ducimus rem facere. Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Nemo et dolorem neque consequuntur
-                facilis ut natus consequatur ipsam molestiae ex sint ullam, officia
-                tempore, praesentium magnam laudantium tenetur amet aut! Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Saepe ducimus deleniti,
-                ipsam ab cumque earum dolorum eum modi maiores facere necessitatibus
-                magni at pariatur assumenda asperiores consequatur possimus nobis illum?</p>
+        <div class="col mx-5">
+            {% if request.user.is_authenticated %}
+                {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False %}
+            {% else %}
+                <h2>{{ paragraph2.title }}</h2><br>
+                <p class="myText">{{ paragraph2.content }}</p>
+            {% endif %}
         </div>
-        <!-- /.col-md-4 -->
+        <div class="col">
+            <img class="img-fluid " src="{% static 'core/img/home_1.png' %}" id="floated">
+        </div>
     </div>
-    <!-- /.row -->
-
 {% endblock content %}
+{% block javascript %}
+    <script src="{% static 'core/js/ajax.js' %}"></script>
+{% endblock %}

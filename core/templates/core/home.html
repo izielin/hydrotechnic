@@ -3,7 +3,7 @@
 {% block content %}
     <div class="bannerText">
         {% if request.user.is_authenticated %}
-            {% include "includes/paragraphForm.html" with paragraph=paragraph1 mySlug="home_1" subtitle=True link=True %}
+            {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="home_1" subtitle=True link=True %}
         {% else %}
             <h2>{{ paragraph1.title }}</h2><br>
             <h3>{{ paragraph1.subtitle }}</h3>
@@ -27,7 +27,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_2.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph2 mySlug="home_2" subtitle=False link=True %}
+                                    {% include "core/includes/paragraphForm.html" with paragraph=paragraph2 mySlug="home_2" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_2.png' %}" alt="">
@@ -46,7 +46,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_3.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph3 mySlug="home_3" subtitle=False link=True %}
+                                    {% include "core/includes/paragraphForm.html" with paragraph=paragraph3 mySlug="home_3" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_3.png' %}" alt="">
@@ -65,7 +65,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_4.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph4 mySlug="home_4" subtitle=False link=True %}
+                                    {% include "core/includes/paragraphForm.html" with paragraph=paragraph4 mySlug="home_4" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_4.png' %}" alt="">
@@ -84,7 +84,7 @@
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_5.png' %}" alt="">
                                     </div>
-                                    {% include "includes/paragraphForm.html" with paragraph=paragraph5 mySlug="home_5" subtitle=False link=True %}
+                                    {% include "core/includes/paragraphForm.html" with paragraph=paragraph5 mySlug="home_5" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
                                         <img src="{% static 'core/img/home_5.png' %}" alt="">
@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-lg-5 offset-md-0 col-md-12 text-left section-title-wrap mt-4 mt-lg-0">
                     {% if request.user.is_authenticated %}
-                        {% include "includes/paragraphForm.html" with paragraph=paragraph6 mySlug="home_6" subtitle=True link=True %}
+                        {% include "core/includes/paragraphForm.html" with paragraph=paragraph6 mySlug="home_6" subtitle=True link=True %}
                     {% else %}
                         <h5>{{ paragraph6.title }}</h5>
                         <h3>{{ paragraph6.subtitle }}</h3>
@@ -114,32 +114,8 @@
             </div>
         </div>
     </section>
-
 {% endblock content %}
 
 {% block javascript %}
-
-    <script>
-
-        $("form").change(function (event) {
-            event.preventDefault();
-            console.log("start!");
-            let form = $(this).closest("form");
-            console.log("create post is working!")
-            $.ajax({
-                url: form.attr("data-url_root"),
-                data: form.serialize(),
-                dataType: 'json',
-                success: function (json) {
-                },
-                error: function (xhr, errmsg, err) {
-                    $('#results').html("<div class='alert-box warning radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                        " <a href='#' class='close'>&times;</a></div>");
-                    console.log(xhr.status + ": " + xhr.responseText);
-                }
-            });
-        });
-
-    </script>
-
+    <script src="{% static 'core/js/ajax.js' %}"></script>
 {% endblock %}

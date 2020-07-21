@@ -12,8 +12,7 @@
                value="{{ paragraph.subtitle }}">
     {% endif %}
     <label for="id_content" class="requiredField">Treść: </label>
-    <textarea type="text" name="content" class="{{ mySlug }}" required id="id_content">
-            {{ paragraph.content }}</textarea>
+    <textarea type="text" name="content" class="{{ mySlug }}" required id="id_content">{{ paragraph.content }}</textarea>
     {% if link %}
         <label for="id_link" class="requiredField">Link</label>
         <select name="link" data-title="Select Gender" data-style="btn-default btn-block"
@@ -22,7 +21,7 @@
             {% if paragraph.link != '' %}
                 {% for x,y in form.fields.link.choices %}
                     {% if x == paragraph.link %}
-                        <option>{{ y }}</option>
+                        <option value="{{ x }}">{{ y }}</option>
                     {% endif %}
                 {% endfor %}
             {% else %}
