@@ -12,7 +12,7 @@
                     {% if request.user.is_authenticated %}
                         <div class="row">
                             <div class="col-12 px-5">
-                                <form id="offerForm" method="post" enctype="multipart/form-data" id="formUpload"
+                                <form id="offerForm" method="post" enctype="multipart/form-data"
                                       data-url_root="{% url 'core:create_offer' %}">
                                     {% csrf_token %}
                                     <div class="feature-service " style="width: 100%;">
@@ -25,16 +25,17 @@
                                                    style="display: none;" onchange="previewFile()">
                                         </div>
                                         <div class="icon" style="margin-top:170px;">
-                                            <img id="currentImage" src="" alt="">
+                                            <img id="currentImage" src="" alt=""
+                                                 style="  filter: brightness(0) invert(1);">
                                         </div>
                                         <div class="text">
-                                            <label for="id_title">Title:</label>
+                                            <label for="id_title">Tytuł:</label>
                                             <input type="text" name="title" maxlength="100" required="" id="id_title"
                                                    style="margin-bottom: 20px;">
-                                            <label for="id_content">Content:</label>
+                                            <label for="id_content">Treść:</label>
                                             <input type="text" name="content" maxlength="300" required=""
                                                    id="id_content" style="margin-bottom: 20px;">
-                                            <button type="submit" class="main_btn">Save</button>
+                                            <button type="submit" class="main_btn">Zapisz</button>
                                         </div>
                                     </div>
                                 </form>
@@ -47,7 +48,7 @@
                                     <div class="col-12 px-5">
                                         <div class="feature-service ">
                                             <div class="icon">
-                                                <img src="{{ offer.image.url }}" alt="">
+                                                <img class="whiteImage" src="{{ offer.image.url }}" alt="">
                                             </div>
                                             <div class="text">
                                                 <h3>{{ offer.title }}</h3>
@@ -75,9 +76,18 @@
     </section>
     {% if request.user.is_authenticated %}
         <div style="max-width: 70%; margin: auto;">
-            <button class="main_btn" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false"
-                    aria-controls="collapse"> Pokaż pozostałe elementy
-            </button>
+            <div class="row">
+                <button class="main_btn animateButton" type="button" data-toggle="collapse" data-target="#collapse"
+                        aria-expanded="false"
+                        aria-controls="collapse"> Pokaż pozostałe elementy
+                </button>
+                <form class="animateForm" method="post" action="{% url 'core:clear' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="hidden" name="model" value="Offer">
+                    <button class="main_btn ml-3" type="submit"> Usuń wszystko</button>
+                </form>
+            </div>
             <div id="collapse" class="collapse multi-collapse">
                 <div id="offers" class="row container mt-5">
                     {% for offer in offers %}
@@ -85,7 +95,7 @@
                             <div class="feature-service" style="width: 100%;">
                                 <div class="row">
                                     <div class="icon">
-                                        <img src="{{ offer.image.url }}" alt="">
+                                        <img class="whiteImage" src="{{ offer.image.url }}" alt="">
                                     </div>
                                     <div class="col-10">
                                         <div class="text">
@@ -98,12 +108,19 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="next" value="{{ request.path }}">
                                             <button type="submit" class="close">
-                                                <span aria-hidden="true" style="color: red;">Usuń &times;</span>
+                                                <span aria-hidden="true" style="color: red;">&times;</span>
                                             </button>
                                         </form>
                                     </div>
                                 </div>
-
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div id="cardDiv" class="text-white my-5 py-4 text-center mx-auto"
+                             style="background: #183E74; z-index: 1;">
+                            <div class="card-body ">
+                                <p class="text-white m-0" style="animation-delay: 0s;">Nie stworzono jeszcze żadnych
+                                    elementów opisujących oferty firmy.</p>
                             </div>
                         </div>
                     {% endfor %}
@@ -135,21 +152,32 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log(data);
-                    if (data.is_valid) {
-                        $("#offers").prepend(
-                            "<div class=\"col-6 px-5\">\n" +
-                            "<div class=\"feature-service \">\n" +
-                            "<div class=\"icon\">\n"
-                            + "<img src=\" " + data.image + " \" alt=''></div>\n"
-                            + "<div class=\"text\">\n" +
-                            " <h3>" + data.title + "</h3>\n" +
-                            "<p>" + data.content + "</p>\n" +
-                            "</div>\n" +
-                            "</div>\n" +
-                            "</div>\n"
-                        )
+                    try {
+                        $("#cardDiv").fadeToggle(1000);
+                        document.getElementById("id_title").value = "";
+                        document.getElementById("id_content").value = "";
+
+                        let preview = document.getElementById('currentImage');
+                        preview.src = "";
+                    } catch (error) {
                     }
+                    if (data.is_valid) {
+                        setTimeout(function () {
+                            $("#offers").prepend(
+                                "<div class=\"col-6 px-5\">\n" +
+                                "<div class=\"feature-service \">\n" +
+                                "<div class=\"icon\">\n"
+                                + "<img src=\" " + data.image + " \" class='whiteImage' alt=''></div>\n"
+                                + "<div class=\"text\">\n" +
+                                " <h3>" + data.title + "</h3>\n" +
+                                "<p>" + data.content + "</p>\n" +
+                                "</div>\n" +
+                                "</div>\n" +
+                                "</div>\n"
+                            )
+                        }, 1000);
+                    }
+
                 }
             });
             return false;

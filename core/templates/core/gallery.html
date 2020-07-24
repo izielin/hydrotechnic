@@ -34,15 +34,24 @@
             <div class="col-12 col-md-8">
                 <div class="text-muted bg-grey text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
                     <h3>
-        <span style="font-size: 4rem; min-width: 450px; min-height: 450px; ">
-            <i class="fas fa-download"></i>
-        </span><br>
+                        <span style="font-size: 4rem; min-width: 450px; min-height: 450px; ">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <br>
                         Przeciągnij zdjęcie tutaj aby je dodać</h3>
                 </div>
                 <input id="fileupload" type="file" name="file" multiple
                        style="display: none;"
                        data-url="{% url 'core:gallery' %}"
                        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "path":"{{ request.path }}"}'>
+                <div class="row mt-5">
+                    <form class="animateForm mx-auto" method="post" action="{% url 'core:clear' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input type="hidden" name="model" value="Image">
+                        <button class="main_btn ml-3" type="submit"> Usuń wszystko</button>
+                    </form>
+                </div>
             </div>
             <div class="col">
                 <table id="gallery" class="table table-bordered">
@@ -90,5 +99,4 @@
             </div>
         </div>
     {% endif %}
-
 {% endblock %}

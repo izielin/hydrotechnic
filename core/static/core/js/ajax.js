@@ -1,4 +1,4 @@
-$("form").change(function (event) {
+$("form").not('#boxForm').change(function (event) {
     event.preventDefault();
     let form = $(this).closest("form");
     $.ajax({

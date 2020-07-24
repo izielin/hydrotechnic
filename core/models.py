@@ -41,3 +41,16 @@ class Offer(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=300)
     image = models.FileField(upload_to='offers')
+
+
+class Address(models.Model):
+    street = models.CharField(max_length=100)
+    cityName = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15)
+    email = models.CharField(max_length=50)
+
+
+class Box(models.Model):
+    title = models.CharField(max_length=30)
+    amount = models.SmallIntegerField(default=None, blank=True, null=True)
+    experience = models.BooleanField(default=False)

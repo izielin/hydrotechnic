@@ -17,7 +17,7 @@ $(document).ready(function() {
 		  localStart++;
 		  counters[id].innerHTML = localStart;
 		}
-	  }, 15);
+	  }, 60);
 	}
 
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
 	}
   });
 
-}, 5000);
+}, 5700);
 
 
 let owl = $('.owl-carousel');

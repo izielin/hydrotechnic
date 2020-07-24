@@ -1,8 +1,10 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block content %}
+
     <div class="square1"></div>
     <div class="square2"></div>
+
     <div class="row" style="max-width: 100%;">
         <section class="counter section bannerText"
                  style="max-width: 1400px;margin-bottom: 70px;padding: 0 20px 20px 15px;background-color: transparent;margin-top: 150px;">
@@ -18,39 +20,53 @@
                         <h2>{{ paragraph1.title }}</h2><br>
                         <p class="myText">{{ paragraph1.content }}</p>
                     {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <div class="row">
+                            <div class="col-md-8 justify-content-center counter-wrap mx-auto">
+                                <div class="block text-center p-4 mb-4">
+                                    <form method="post" data-url_root="{% url 'core:create_box' %}" id="boxForm">
+                                        {% csrf_token %}
+                                        <label for="id_title">Tytuł:</label>
+                                        <input class="clearTitle" type="text" name="title" maxlength="30" required=""
+                                               id="id_title">
+                                        <label for="id_amount" class="amount">Ilość:</label>
+                                        <input class="amount" type="number" name="amount" required="" id="id_amount">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="experience"
+                                                   id="id_experience">
+                                            <label class="custom-control-label" for="id_experience">Lata
+                                                doświadczenia</label>
+                                        </div>
+                                        <button id="saveButton" type="submit" class="main_btn mt-4">Zapisz</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class="row">
-                        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap animate d-flex">
-                            <div class="block text-center p-4 mb-4 align-self-stretch d-flex">
-                                <div class="text">
-                                    <strong class="count count-title count-number number">{{ years }}</strong>
-                                    <span>Lata Doświadczenia</span>
+                        {% for box in boxes %}
+                            <div class="col-md-6 col-lg-3 justify-content-center">{% if request.user.is_authenticated %}
+                                <form method="post" action="{% url 'core:box_delete' box.pk %}"
+                                      style="margin-right: 10%; margin-top: 30%;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <button type="submit" class="close">
+                                        <span aria-hidden="true" style="color: #183E74;">&times;</span>
+                                    </button>
+                                </form>
+                            {% endif %}
+                                <div class="block text-center p-4 mb-4 ">
+                                    <div class="text">
+                                        {% if box.experience %}
+                                            <strong class="count count-title count-number number">{{ date }}</strong>
+                                        {% else %}
+                                            <strong class="count count-title count-number number">{{ box.amount }}</strong>
+                                        {% endif %}
+                                        <span>{{ box.title }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap animate d-flex">
-                            <div class="block text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-                                <div class="text">
-                                    <strong class="count count-title count-number number">1573</strong>
-                                    <span>Skończonych projektów</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap animate d-flex">
-                            <div class="block text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-                                <div class="text">
-                                    <strong class="count count-title count-number number">2890</strong>
-                                    <span>Zadowolonych klientów</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 justify-content-center counter-wrap animate d-flex">
-                            <div class="block text-center py-4 px-3 mb-4 align-self-stretch d-flex">
-                                <div class="text">
-                                    <strong class="count count-title count-number number">2</strong>
-                                    <span>Lata Gwarancji</span>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -72,4 +88,36 @@
 {% endblock content %}
 {% block javascript %}
     <script src="{% static 'core/js/ajax.js' %}"></script>
+
+    <script>
+        $(function () {
+            let checkbox = document.querySelector("input[name=experience]");
+            let disable = document.getElementsByClassName("amount");
+            $(checkbox).on('click', function () {
+                if ($(this).is(':checked')) {
+                    $(disable).attr('disabled', true);
+                    $(disable).hide('slow');
+                } else {
+                    $(disable).attr('disabled', false);
+                    $(disable).show('slow');
+                }
+            });
+        });
+
+        $("#saveButton").on('click', function (event) {
+            event.preventDefault();
+            let form = $(this).closest("form");
+            $.ajax({
+                url: form.attr("data-url_root"),
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (json) {
+                    $('#boxForm')[0].reset();
+                },
+                error: function (xhr, errmsg, err) {
+                }
+            });
+        });
+
+    </script>
 {% endblock %}

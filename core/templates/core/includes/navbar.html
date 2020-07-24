@@ -1,9 +1,9 @@
+{% load static %}
 <header>
     <div class="header">
-        <p class="logo">Your Logo</p>
+        <img src="{% static "core/img/logo.svg" %}" class="mt-4" alt="">
         <i class="fa fa-bars x2" onclick="menuToggle()"></i>
         <ul id="navigation">
-
             <li>
                 <a href="{% url 'core:home' %}" name="home">Strona główna</a>
             </li>
@@ -17,13 +17,12 @@
                 <a href="{% url 'core:gallery' %}" name="gallery">Galeria</a>
             </li>
             <li>
-                <a href="{% url 'core:contact' %}" name="contact">Kontact</a>
+                <a href="{% url 'core:contact' %}" name="contact">Kontakt</a>
             </li>
             {% if user.is_authenticated %}
                 <li>
                     <a href="{% url 'logout' %}" name="logout">Wyloguj</a>
                 </li>
-
             {% endif %}
             <i class="fa fa-times x2" onclick="menuToggle()"></i>
         </ul>

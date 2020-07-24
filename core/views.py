@@ -1,5 +1,7 @@
+import datetime
 import os
 
+from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.http import JsonResponse, HttpResponseRedirect
@@ -7,8 +9,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from hydrotechnic import settings
-from .forms import ParagraphForm, ImageForm, OfferForm
-from .models import Paragraph, Image, Offer
+from .forms import ParagraphForm, ImageForm, OfferForm, AddressForm, BoxForm
+from .models import Paragraph, Image, Offer, Address, Box
 
 
 def create_paragraph(request):
@@ -38,17 +40,13 @@ def create_paragraph(request):
 
         except (ObjectDoesNotExist, IntegrityError):
 
-            paragraph = Paragraph(title=title_form,
-                                  subtitle=subtitle_form,
-                                  slug=slug,
-                                  content=content_form,
+            paragraph = Paragraph(title=title_form, subtitle=subtitle_form, slug=slug, content=content_form,
                                   link=link_form)
             paragraph.save()
 
         response_data['title'] = title_form
         response_data['subtitle'] = subtitle_form
         response_data['content'] = content_form
-
     else:
         pass
     return JsonResponse(response_data)
@@ -65,6 +63,54 @@ def create_offer(request):
         else:
             data = {'is_valid': False}
     return JsonResponse(data)
+
+
+def create_address(request):
+    form = AddressForm(request.GET or None)
+    if form.is_valid():
+        street = request.GET.get('street')
+        cityName = request.GET.get('cityName')
+        phone = request.GET.get('phone')
+        email = request.GET.get('email')
+
+        try:
+            address = Address.objects.get()
+            address.street = street
+            address.cityName = cityName
+            address.phone = phone
+            address.email = email
+            address.save()
+
+        except (ObjectDoesNotExist, IntegrityError):
+            address = Address(street=street, cityName=cityName, phone=phone, email=email)
+            address.save()
+
+        address_data = {'is_valid': True, 'street': street, 'city': cityName, 'phone': phone, 'email': email}
+    else:
+        address_data = {'is_valid': False}
+    return JsonResponse(address_data)
+
+def delete_box(request, pk):
+    Box.objects.filter(id=pk).delete()
+    return redirect(request.POST.get('next'))
+
+def create_box(request):
+    form = BoxForm(request.GET or None)
+    if 'experience' not in request.GET.items():
+        experience = False
+    else:
+        experience = True
+
+    if form.is_valid():
+        title = request.GET.get('title')
+        amount = request.GET.get('amount')
+        experience = experience
+        box = Box(title=title, amount=amount, experience=experience)
+        box.save()
+        address_data = {'is_valid': True, 'title': title, 'amount': amount, 'experience': experience}
+    else:
+        address_data = {'is_valid': False}
+    return JsonResponse(address_data)
 
 
 def get_context(slug):
@@ -89,7 +135,21 @@ def home(request, *args, **kwargs):
 
 def about(request):
     context = get_context("about")
+    context['box_form'] = BoxForm
+    context['boxes'] = Box.objects.all()
+    context['date'] = int(datetime.date.today().year - datetime.date(1986, 1, 1).year)
     return render(request, 'core/about.html', context)
+
+
+def clear_all(request):
+    Model = apps.get_model('core', request.POST.get('model'))
+    for item in Model.objects.all():
+        try:
+            item.file.delete()
+            item.delete()
+        except AttributeError:
+            item.delete()
+    return redirect(request.POST.get('next'))
 
 
 def delete_offer(request, pk):
@@ -109,6 +169,8 @@ def offer(request):
 
 def contact(request):
     context = get_context("contact")
+    context['address'] = Address.objects.get()
+    context['address_form'] = AddressForm
     return render(request, 'core/contact.html', context)
 
 

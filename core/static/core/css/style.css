@@ -595,7 +595,7 @@ p, .counter-wrap {
     font-size: 13px;
     text-transform: uppercase;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: .5px;
     position: relative;
     transition: all 300ms linear 0s;
 }
@@ -621,14 +621,18 @@ p, .counter-wrap {
 
 
 .feature-service {
+    opacity: 0;
     text-align: left;
     float: left;
     position: relative;
     margin-bottom: 40px;
     max-width: 500px;
+    animation: fadeIn 2s linear forwards;
+    animation-delay: 2s;
 }
 
 .feature-service .icon {
+    opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -642,6 +646,8 @@ p, .counter-wrap {
     -ms-border-radius: 2px;
     border-radius: 2px;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.4), 0 10px 15px 0 rgba(0, 0, 0, 0.19);
+    animation: fadeIn 2s linear forwards;
+    animation-delay: 2s;
 }
 
 .feature-service .icon i {
@@ -679,16 +685,16 @@ label {
     color: var(--main-color);
 }
 
-input[type=text], textarea, input[type=password], input[type=email], select {
+input[type=text], textarea, input[type=password], input[type=email], select, input[type=number] {
     display: block;
     background-color: transparent;
     width: 100%;
     outline: none;
     font-size: 18px;
-     border-style: solid;
-  border-width: 0px 0px 1px 0px;
-  border-color: var(--main-color);
-  box-sizing: border-box;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: var(--main-color);
+    box-sizing: border-box;
 }
 
 textarea {
@@ -705,15 +711,15 @@ textarea {
     width: 100%;
     margin-bottom: 30px;
     transition: 0.2s ease-in-out;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-    cursor:pointer;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
     filter: grayscale(1) brightness(.8);
 }
 
 
 .tz-gallery .lightbox img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     filter: grayscale(0) brightness(1);
 
 }
@@ -724,7 +730,30 @@ textarea {
 
 
 .collapsing {
-  -webkit-transition-duration:1.2s;
-  transition-duration: 1.2s;
+    -webkit-transition-duration: 1.2s;
+    transition-duration: 1.2s;
 
+}
+
+.contact-hr {
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: var(--main-color);
+    box-sizing: border-box;
+}
+
+.whiteImage {
+    filter: brightness(0) invert(1);
+}
+
+.animateForm label, .animateForm input, .animateForm textarea, .animateForm select, .animateForm button, .animateButton, .animateForm h5 i, #gallery, .bg-grey, .tz-gallery {
+    opacity: 0;
+    animation: fadeIn 2s linear forwards;
+    animation-delay: 2s;
+}
+
+.contact-info {
+    opacity: 0;
+    animation: fadeIn 1s linear forwards;
+    animation-delay: 5s;
 }
