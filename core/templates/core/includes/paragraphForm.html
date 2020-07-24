@@ -1,4 +1,6 @@
-<form method="POST" class="form-group animateForm" method="post" novalidate data-url_root="{% url 'core:create' %}">
+{% load static %}
+<form method="POST" class="form-group animateForm" data-url_root="{% url 'core:create' %}"
+      enctype="multipart/form-data">
     {% csrf_token %}
 
     <label for="id_title" class="requiredField">Tytuł: </label>
@@ -12,7 +14,8 @@
                value="{{ paragraph.subtitle }}">
     {% endif %}
     <label for="id_content" class="requiredField">Treść: </label>
-    <textarea type="text" name="content" class="{{ mySlug }}" required id="id_content">{{ paragraph.content }}</textarea>
+    <textarea type="text" name="content" class="{{ mySlug }}" required
+              id="id_content">{{ paragraph.content }}</textarea>
     {% if link %}
         <label for="id_link" class="requiredField">Link</label>
         <select name="link" data-title="Select Gender" data-style="btn-default btn-block"
@@ -32,4 +35,14 @@
             {% endfor %}
         </select>
     {% endif %}
+<div class="feature-service" >
+    <div class="icon" style="margin-top: 30px; max-width: 30px; max-height: 30px; box-shadow: none;">
+        <label for="id_image" style="margin: 0">
+            <img src="{% static 'core/img/plus.png' %}" alt="" style="max-width: 20px; max-height: 20px; margin: auto;" class="whiteImage">
+        </label>
+        <input type="file" name="image" required="" id="id_image"
+               style="display: none;">
+    </div>
+    </div>
+
 </form>

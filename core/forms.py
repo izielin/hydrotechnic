@@ -8,7 +8,7 @@ class ParagraphForm(forms.ModelForm):
 
     class Meta:
         model = Paragraph
-        fields = ['title', 'subtitle', 'content', 'link']
+        fields = ['title', 'subtitle', 'content', 'link', 'image']
 
     def __init__(self, *args, **kwargs):
         super(ParagraphForm, self).__init__(*args, **kwargs)

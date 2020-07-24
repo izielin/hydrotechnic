@@ -5,7 +5,7 @@ from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from hydrotechnic import settings
@@ -14,41 +14,29 @@ from .models import Paragraph, Image, Offer, Address, Box
 
 
 def create_paragraph(request):
-    form = ParagraphForm(request.GET or None)
     response_data = {}
-    if form.is_valid():
-        title_form = request.GET.get('title')
-        slug = request.GET.get('slug')
-        if 'subtitle' in request.GET:
-            subtitle_form = request.GET.get('subtitle')
-        else:
-            subtitle_form = ''
-        if 'link' in request.GET:
-            link_form = request.GET.get('link')
-        else:
-            link_form = ''
-        content_form = request.GET.get('content')
+    slug = request.POST.get('slug')
 
-        try:
-            paragraph = Paragraph.objects.get(slug=slug)
-            paragraph.title = title_form
-            paragraph.subtitle = subtitle_form
+    try:
+        instance = Paragraph.objects.get(slug=slug)
+        form = ParagraphForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            paragraph = form.save(commit=False)
             paragraph.slug = slug
-            paragraph.content = content_form
-            paragraph.link = link_form
             paragraph.save()
 
-        except (ObjectDoesNotExist, IntegrityError):
+    except (ObjectDoesNotExist, IntegrityError):
 
-            paragraph = Paragraph(title=title_form, subtitle=subtitle_form, slug=slug, content=content_form,
-                                  link=link_form)
+        form = ParagraphForm(request.POST, request.FILES)
+        if form.is_valid():
+            paragraph = form.save(commit=False)
+            paragraph.slug = slug
             paragraph.save()
 
-        response_data['title'] = title_form
-        response_data['subtitle'] = subtitle_form
-        response_data['content'] = content_form
-    else:
-        pass
+    response_data['title'] = request.POST.get('title')
+    response_data['subtitle'] = request.POST.get('subtitle')
+    response_data['content'] = request.POST.get('content')
+
     return JsonResponse(response_data)
 
 
@@ -90,9 +78,11 @@ def create_address(request):
         address_data = {'is_valid': False}
     return JsonResponse(address_data)
 
+
 def delete_box(request, pk):
     Box.objects.filter(id=pk).delete()
     return redirect(request.POST.get('next'))
+
 
 def create_box(request):
     form = BoxForm(request.GET or None)
@@ -120,6 +110,7 @@ def get_context(slug):
 
     try:
         paragraph = Paragraph.objects.filter(slug__contains=slug).count()
+        print(paragraph)
         for p in range(1, int(paragraph) + 1):
             context["paragraph{0}".format(p)] = Paragraph.objects.get(slug=slug + "_{0}".format(p))
     except:
@@ -130,6 +121,7 @@ def get_context(slug):
 
 def home(request, *args, **kwargs):
     context = get_context("home")
+    print(context)
     return render(request, 'core/home.html', context)
 
 
@@ -169,7 +161,10 @@ def offer(request):
 
 def contact(request):
     context = get_context("contact")
-    context['address'] = Address.objects.get()
+    try:
+        context['address'] = Address.objects.get()
+    except ObjectDoesNotExist:
+        context['address'] = ''
     context['address_form'] = AddressForm
     return render(request, 'core/contact.html', context)
 

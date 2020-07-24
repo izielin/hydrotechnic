@@ -5,15 +5,20 @@
     <div class="square1"></div>
     <div class="square2"></div>
 
-    <div class="row" style="max-width: 100%;">
-        <section class="counter section bannerText"
-                 style="max-width: 1400px;margin-bottom: 70px;padding: 0 20px 20px 15px;background-color: transparent;margin-top: 150px;">
+    <div class="row" style="min-width: 100%; margin-right: 0;
+    margin-left: 0;" >
+        <section class="counter"
+                 style=" background-color: transparent; margin: 150px auto 70px; min-width: 80%;">
             <div class="row" style="width: 100%;">
-                <div class="col-4 p-0">
-                    <img class="img-fluid mb-4 mb-lg-0" src="{% static 'core/img/f5.png' %}" alt="">
+                <div class="col-6 p-0">
+                    {% if not paragraph1.image.url %}
+                    <img class="img-fluid mb-4 mb-lg-0" src="http://via.placeholder.com/400x600" alt="">
+                    {%  else %}
+                    <img class="img-fluid mb-4 mb-lg-0" src="{{ paragraph1.image.url }}" alt="">
+                    {% endif %}
                 </div>
-                <div class="col-1"></div>
-                <div class="col-7">
+
+                <div class="col-6">
                     {% if request.user.is_authenticated %}
                         {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False %}
                     {% else %}
@@ -21,7 +26,7 @@
                         <p class="myText">{{ paragraph1.content }}</p>
                     {% endif %}
                     {% if request.user.is_authenticated %}
-                        <div class="row">
+                        <div class="row mt-5">
                             <div class="col-md-8 justify-content-center counter-wrap mx-auto">
                                 <div class="block text-center p-4 mb-4">
                                     <form method="post" data-url_root="{% url 'core:create_box' %}" id="boxForm">
@@ -75,14 +80,18 @@
     <div class="row align-items-center bannerText" style="max-width: 1400px; transform: translateX(-50px);">
         <div class="col mx-5">
             {% if request.user.is_authenticated %}
-                {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False %}
+                {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_2" subtitle=False link=False %}
             {% else %}
                 <h2>{{ paragraph2.title }}</h2><br>
                 <p class="myText">{{ paragraph2.content }}</p>
             {% endif %}
         </div>
         <div class="col">
-            <img class="img-fluid " src="{% static 'core/img/home_1.png' %}" id="floated">
+            {% if not paragraph2.image.url %}
+            <img class="img-fluid mb-4 mb-lg-0" src="http://via.placeholder.com/640x360" alt="">
+            {%  else %}
+            <img class="img-fluid mb-4 mb-lg-0" src="{{ paragraph2.image.url }}" alt="">
+            {% endif %}
         </div>
     </div>
 {% endblock content %}

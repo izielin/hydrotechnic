@@ -752,7 +752,7 @@ textarea {
     animation-delay: 2s;
 }
 
-.contact-info {
+.contact-info, .counter  {
     opacity: 0;
     animation: fadeIn 1s linear forwards;
     animation-delay: 5s;

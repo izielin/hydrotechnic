@@ -23,12 +23,10 @@ class Paragraph(models.Model):
     slug = models.SlugField()
     content = models.TextField()
     link = models.CharField(choices=LINK_CHOICES, max_length=50, blank=True)
+    image = models.FileField(upload_to='paragraph', blank=True, null=True)
 
     def __str__(self):
         return self.title
-
-    def get_absolute_url(self):
-        return reverse('post-update', kwargs={'pk': self.pk})
 
 
 class Image(models.Model):

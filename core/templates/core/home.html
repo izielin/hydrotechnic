@@ -11,8 +11,12 @@
             <a href="{{ paragraph1.link }}" class="main_btn">Dowiedz się więcej &rarr;</a>
         {% endif %}
     </div>
+{% if not paragraph1.image.url %}
+                    <img class="bulb" src="http://via.placeholder.com/900x500" alt="">
+                    {%  else %}
+                    <img src=" {{ paragraph1.image.url }} " class="bulb">
+                    {% endif %}
 
-    <img src="{% static 'core/img/home_1.png' %}" class="bulb">
     <div class="square1"></div>
     <div class="square2"></div>
 
@@ -25,12 +29,12 @@
                             <div class="single-feature">
                                 {% if request.user.is_authenticated %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_2.png' %}" alt="">
+                                        <img class="whiteImage" src="{{ paragraph2.image.url }}" alt="">
                                     </div>
                                     {% include "core/includes/paragraphForm.html" with paragraph=paragraph2 mySlug="home_2" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_2.png' %}" alt="">
+                                        <img class="whiteImage" src=" {{ paragraph2.image.url }} " alt="">
                                     </div>
                                     <h4>{{ paragraph2.title }}</h4>
                                     <p>
@@ -44,12 +48,12 @@
                             <div class="single-feature">
                                 {% if request.user.is_authenticated %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_3.png' %}" alt="">
+                                        <img class="whiteImage" src="{{ paragraph3.image.url }}" alt="">
                                     </div>
                                     {% include "core/includes/paragraphForm.html" with paragraph=paragraph3 mySlug="home_3" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_3.png' %}" alt="">
+                                        <img class="whiteImage" src=" {{ paragraph3.image.url }} " alt="">
                                     </div>
                                     <h4>{{ paragraph3.title }}</h4>
                                     <p>
@@ -63,12 +67,12 @@
                             <div class="single-feature">
                                 {% if request.user.is_authenticated %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_4.png' %}" alt="">
+                                        <img class="whiteImage" src="{{ paragraph4.image.url }}" alt="">
                                     </div>
                                     {% include "core/includes/paragraphForm.html" with paragraph=paragraph4 mySlug="home_4" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_4.png' %}" alt="">
+                                        <img class="whiteImage" src=" {{ paragraph4.image.url }} " alt="">
                                     </div>
                                     <h4>{{ paragraph4.title }}</h4>
                                     <p>
@@ -82,12 +86,12 @@
                             <div class="single-feature">
                                 {% if request.user.is_authenticated %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_5.png' %}" alt="">
+                                        <img class="whiteImage" src="{{ paragraph5.image.url }}" alt="">
                                     </div>
                                     {% include "core/includes/paragraphForm.html" with paragraph=paragraph5 mySlug="home_5" subtitle=False link=True %}
                                 {% else %}
                                     <div class="feature-img">
-                                        <img src="{% static 'core/img/home_5.png' %}" alt="">
+                                        <img class="whiteImage" src=" {{ paragraph5.image.url }} " alt="">
                                     </div>
                                     <h4>{{ paragraph5.title }}</h4>
                                     <p>
