@@ -54,7 +54,10 @@ def create_offer(request):
 
 
 def create_address(request):
+    print("start")
     form = AddressForm(request.GET or None)
+    print(form)
+    print(form.is_valid())
     if form.is_valid():
         street = request.GET.get('street')
         cityName = request.GET.get('cityName')
@@ -62,6 +65,7 @@ def create_address(request):
         email = request.GET.get('email')
 
         try:
+            print("I")
             address = Address.objects.get()
             address.street = street
             address.cityName = cityName
@@ -70,6 +74,7 @@ def create_address(request):
             address.save()
 
         except (ObjectDoesNotExist, IntegrityError):
+            print("II")
             address = Address(street=street, cityName=cityName, phone=phone, email=email)
             address.save()
 
@@ -86,7 +91,7 @@ def delete_box(request, pk):
 
 def create_box(request):
     form = BoxForm(request.GET or None)
-    if 'experience' not in request.GET.items():
+    if request.GET.get('experience') != 'on':
         experience = False
     else:
         experience = True
@@ -160,12 +165,13 @@ def offer(request):
 
 
 def contact(request):
-    context = get_context("contact")
+    context = {
+        'form': AddressForm,
+    }
     try:
         context['address'] = Address.objects.get()
     except ObjectDoesNotExist:
         context['address'] = ''
-    context['address_form'] = AddressForm
     return render(request, 'core/contact.html', context)
 
 

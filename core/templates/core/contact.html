@@ -15,15 +15,7 @@
 
     <div class=" container " style="margin-bottom: 150px;">
         <div class="row">
-            <div class="col-md-6 mr-5 pr-5 border-right">
-                {% if request.user.is_authenticated %}
-                    {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="contact_1" subtitle=False link=False %}
-                {% else %}
-                    <h2>{{ paragraph1.title }}</h2><br>
-                    <p class="myText">{{ paragraph1.content }}</p>
-                {% endif %}
-            </div>
-            <div class="col-md-4 ml-2 pl-2">
+            <div class="col-6 ml-2 pl-2 mx-auto">
                 <h3>Dane Kontaktowe</h3>
                 {% if request.user.is_authenticated %}
                     <form method="POST" class="form-group animateForm" method="post" novalidate
@@ -69,6 +61,7 @@
                                        required="" id="id_email" value="{{ address.email }}">
                             </div>
                         </div>
+
                     </form>
                 {% else %}
                     <div class="row mt-4 contact-info">
@@ -108,5 +101,21 @@
     </div>
 {% endblock content %}
 {% block javascript %}
-    <script src="{% static 'core/js/ajax.js' %}"></script>
+    <script>
+    $("form").change(function (event) {
+            event.preventDefault();
+            let form = $(this).closest("form");
+                                console.log(form.serialize());
+            $.ajax({
+                url: form.attr("data-url_root"),
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (json) {
+                    $('#boxForm')[0].reset();
+                },
+                error: function (xhr, errmsg, err) {
+                }
+            });
+        });
+        </script>
 {% endblock %}

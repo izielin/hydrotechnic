@@ -68,7 +68,7 @@
                         {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="offer_1" subtitle=False link=False %}
                     {% else %}
                         <h3>{{ paragraph1.title }}</h3><br>
-                        <p class="myText">{{ paragraph1.content }}</p>
+                        <p class="myText" style="white-space: pre-line">{{ paragraph1.content }}</p>
                     {% endif %}
                 </div>
             </div>
@@ -130,10 +130,10 @@
     {% endif %}
     <div class="bannerText" style="max-width: 70%; margin: 150px auto;">
         {% if request.user.is_authenticated %}
-            {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="offer_2" subtitle=False link=False %}
+            {% include "core/includes/paragraphForm.html" with paragraph=paragraph2 mySlug="offer_2" subtitle=False link=False %}
         {% else %}
             <h2>{{ paragraph2.title }}</h2><br>
-            <p class="myText">{{ paragraph2.content }}</p>
+            <p class="myText" style="white-space: pre-line">{{ paragraph2.content }}</p>
         {% endif %}
     </div>
 {% endblock content %}

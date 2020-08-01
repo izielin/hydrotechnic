@@ -10,20 +10,20 @@
         <section class="counter"
                  style=" background-color: transparent; margin: 150px auto 70px; min-width: 80%;">
             <div class="row" style="width: 100%;">
-                <div class="col-6 p-0">
+                <div class="col-5 p-0">
                     {% if not paragraph1.image.url %}
                     <img class="img-fluid mb-4 mb-lg-0" src="http://via.placeholder.com/400x600" alt="">
                     {%  else %}
-                    <img class="img-fluid mb-4 mb-lg-0" src="{{ paragraph1.image.url }}" alt="">
+                    <img class="mb-4 mb-lg-0" style="max-height: 600px;" src="{{ paragraph1.image.url }}" alt="">
                     {% endif %}
                 </div>
 
-                <div class="col-6">
+                <div class="col-7">
                     {% if request.user.is_authenticated %}
                         {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False %}
                     {% else %}
                         <h2>{{ paragraph1.title }}</h2><br>
-                        <p class="myText">{{ paragraph1.content }}</p>
+                        <p class="myText" style="white-space: pre-line">{{ paragraph1.content }}</p>
                     {% endif %}
                     {% if request.user.is_authenticated %}
                         <div class="row mt-5">
@@ -80,10 +80,10 @@
     <div class="row align-items-center bannerText" style="max-width: 1400px; transform: translateX(-50px);">
         <div class="col mx-5">
             {% if request.user.is_authenticated %}
-                {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_2" subtitle=False link=False %}
+                {% include "core/includes/paragraphForm.html" with paragraph=paragraph2 mySlug="about_2" subtitle=False link=False %}
             {% else %}
                 <h2>{{ paragraph2.title }}</h2><br>
-                <p class="myText">{{ paragraph2.content }}</p>
+                <p class="myText" style="white-space: pre-line">{{ paragraph2.content }}</p>
             {% endif %}
         </div>
         <div class="col">
@@ -116,6 +116,7 @@
         $("#saveButton").on('click', function (event) {
             event.preventDefault();
             let form = $(this).closest("form");
+                                console.log(form.serialize());
             $.ajax({
                 url: form.attr("data-url_root"),
                 data: form.serialize(),

@@ -12,11 +12,14 @@
 <script src="{% static 'core/js/main.js' %}"></script>
 <script type="text/javascript">
 
-
     function menuToggle() {
         const element = document.getElementById("navigation");
         element.classList.toggle("show");
     }
 
     document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()));
+
+    $(document).ready(function(){
+    $(this).scrollTop(0);
+    });
 </script>
