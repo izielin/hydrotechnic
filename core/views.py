@@ -16,13 +16,17 @@ from .models import Paragraph, Image, Offer, Address, Box
 def create_paragraph(request):
     response_data = {}
     slug = request.POST.get('slug')
-
+    print(slug)
     try:
         instance = Paragraph.objects.get(slug=slug)
         form = ParagraphForm(request.POST, request.FILES, instance=instance)
+        print(slug, instance)
+        print(form.is_valid())
+        print(form)
         if form.is_valid():
             paragraph = form.save(commit=False)
             paragraph.slug = slug
+            paragraph.image = form.cleaned_data['image']
             paragraph.save()
 
     except (ObjectDoesNotExist, IntegrityError):
@@ -31,6 +35,7 @@ def create_paragraph(request):
         if form.is_valid():
             paragraph = form.save(commit=False)
             paragraph.slug = slug
+            paragraph.image = form.cleaned_data['image']
             paragraph.save()
 
     response_data['title'] = request.POST.get('title')
@@ -189,7 +194,7 @@ def delete_file(request, pk):
 
 class Gallery(View):
     def get(self, request):
-        photos_list = Image.objects.filter(page__contains="gallery")
+        photos_list = Image.objects.filter(page__contains="galeria")
         return render(self.request, 'core/gallery.html', {'photos': photos_list})
 
     def post(self, request):

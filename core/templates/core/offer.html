@@ -42,7 +42,6 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="owl-carousel owl-theme">
                             <div class="row">
                                 {% for offer in offers %}
                                     <div class="col-12 px-5">
@@ -56,11 +55,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {% if forloop.counter|divisibleby:4 %}</div>
-                                        <div class="row">{% endif %}
-                                {% endfor %}
+                                    {% endfor %}
                                 </div>
-                        </div>
                     {% endif %}
                 </div>
                 <div class="col-lg-5 offset-md-0 col-md-12 text-left section-title-wrap mt-4 mt-lg-0">
@@ -153,7 +149,7 @@
                 contentType: false,
                 success: function (data) {
                     try {
-                        $("#cardDiv").fadeToggle(1000);
+                        $("#cardDiv").fadeOut(1000);
                         document.getElementById("id_title").value = "";
                         document.getElementById("id_content").value = "";
 

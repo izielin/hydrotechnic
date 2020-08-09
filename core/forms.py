@@ -5,6 +5,7 @@ from .models import Paragraph, LINK_CHOICES, Image, Offer, Address, Box
 class ParagraphForm(forms.ModelForm):
     subtitle = forms.CharField(required=False)
     link = forms.CharField(required=False)
+    image = forms.FileField(required=False)
 
     class Meta:
         model = Paragraph

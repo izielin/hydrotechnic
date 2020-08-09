@@ -11,7 +11,7 @@
                  style=" background-color: transparent; margin: 150px auto 70px; min-width: 80%;">
             <div class="row" style="width: 100%;">
                 <div class="col-5 p-0">
-                    {% if not paragraph1.image.url %}
+                    {% if not paragraph1.image %}
                     <img class="img-fluid mb-4 mb-lg-0" src="http://via.placeholder.com/400x600" alt="">
                     {%  else %}
                     <img class="mb-4 mb-lg-0" style="max-height: 600px;" src="{{ paragraph1.image.url }}" alt="">
@@ -20,7 +20,7 @@
 
                 <div class="col-7">
                     {% if request.user.is_authenticated %}
-                        {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False %}
+                        {% include "core/includes/paragraphForm.html" with paragraph=paragraph1 mySlug="about_1" subtitle=False link=False image=True%}
                     {% else %}
                         <h2>{{ paragraph1.title }}</h2><br>
                         <p class="myText" style="white-space: pre-line">{{ paragraph1.content }}</p>
@@ -80,14 +80,14 @@
     <div class="row align-items-center bannerText" style="max-width: 1400px; transform: translateX(-50px);">
         <div class="col mx-5">
             {% if request.user.is_authenticated %}
-                {% include "core/includes/paragraphForm.html" with paragraph=paragraph2 mySlug="about_2" subtitle=False link=False %}
+                {% include "core/includes/paragraphForm.html" with paragraph=paragraph2 mySlug="about_2" subtitle=False link=False image=True%}
             {% else %}
                 <h2>{{ paragraph2.title }}</h2><br>
                 <p class="myText" style="white-space: pre-line">{{ paragraph2.content }}</p>
             {% endif %}
         </div>
         <div class="col">
-            {% if not paragraph2.image.url %}
+            {% if not paragraph2.image %}
             <img class="img-fluid mb-4 mb-lg-0" src="http://via.placeholder.com/640x360" alt="">
             {%  else %}
             <img class="img-fluid mb-4 mb-lg-0" src="{{ paragraph2.image.url }}" alt="">
