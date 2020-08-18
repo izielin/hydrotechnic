@@ -36,6 +36,7 @@ coverage.xml
 *.log
 *.pot
 .DS_Store
+core/static/admin
 
 # Sphinx documentation
 docs/_build/
